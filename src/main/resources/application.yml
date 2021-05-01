@@ -1,0 +1,18 @@
+
+server:
+  port: 8090
+
+spring:
+  jpa:
+    properties:
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
+
+
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    #url: jdbc:sqlserver://LAPTOP-ET2K0EOM\SQLEXPRESS\SQLEXPRESS:1433;databaseName=HorarioUniDB
+    #username: SqlJava
+    #password: 123456
+    url: jdbc:sqlserver://dmucentral.database.windows.net:1433;databaseName=generadorHorario
+    username: ucentral
+    password: Practica5
