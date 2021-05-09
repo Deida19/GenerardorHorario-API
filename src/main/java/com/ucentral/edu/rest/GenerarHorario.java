@@ -61,7 +61,7 @@ public class GenerarHorario {
 		return ResponseEntity.ok(optionalEstudiante);
 	}
 	
-	
+	@CrossOrigin
 	@RequestMapping(value = "EstudiantebyDoc", method = RequestMethod.GET)
 	public List<Estudiante> buscarDocumento(@RequestParam ("documento") String document){
 		List<Estudiante> lstEstudiante = EstuService.findbydocumento(document);
@@ -72,7 +72,7 @@ public class GenerarHorario {
 		return lstEstudiante;
 	}
 	
-	
+	@CrossOrigin
 	@RequestMapping(value = "AllEstudiantes", method = RequestMethod.GET)
 	public ResponseEntity<List<Estudiante>> autenticacion(){
 		
@@ -82,7 +82,7 @@ public class GenerarHorario {
 		
 	}
 	
-	
+	@CrossOrigin
 	@RequestMapping(value = "Estudiante", method = RequestMethod.GET)
 	public ResponseEntity<Estudiante> getEstudianteId(@RequestParam("EstudianteId") Integer EstudianteId){
 		Optional<Estudiante> optionalEstudiante = estudDAO.findById(EstudianteId);
@@ -93,25 +93,28 @@ public class GenerarHorario {
 		}
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "AsignaturasEstudiante", method = RequestMethod.GET)
 	public ResponseEntity<List<Asignatura>> getAsignaturaEstudiante(@RequestParam("idEstudiante") Integer idEstudiante){
 		List<Asignatura> lstAsignaturasEstudiante = asignaturaServicio.asignaturaPendEstudiante(idEstudiante);
 		return ResponseEntity.ok(lstAsignaturasEstudiante);
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "AsignaturaEstudio/{planEstudio}", method = RequestMethod.GET)
 	public ResponseEntity<List<Asignatura>> getAsignaturaPlanEstudio(@PathVariable("planEstudio") Integer planEstudio){
 		List<Asignatura> lstAsignaturaPlanEstudio = asignaturaServicio.asignaturaXPlanEstudio(planEstudio);
 		return ResponseEntity.ok(lstAsignaturaPlanEstudio);
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "Grupos/{idAsignatura}", method = RequestMethod.GET)
 	public ResponseEntity<List<Grupo>> getgruposByAsignatura(@PathVariable("idAsignatura") Integer idAsignatura){
 		List<Grupo> lstGrupos = grupoServicio.findbyAsignatura(idAsignatura);
 		return ResponseEntity.ok(lstGrupos);
 	}
 
-	
+	@CrossOrigin
 	@RequestMapping(value = "Horario/{idGrupo}", method = RequestMethod.GET)
 	public ResponseEntity<List<Horario>> getHorarioByGrupo(@PathVariable("idGrupo") Integer idGrupo){
 		List<Horario> lstHorario = horarioServicio.findbyGrupo(idGrupo);
@@ -119,13 +122,14 @@ public class GenerarHorario {
 	}
 	
 	
+	@CrossOrigin
 	@RequestMapping(value = "AsignaturasEstud/{idEstudiante}", method = RequestMethod.GET)
 	public ResponseEntity<List<HorarioEstudiante>> getAsignaturaEstudiante2(@PathVariable("idEstudiante") Integer idEstudiante){
 		List<HorarioEstudiante> lstAsignaturasEstudiante2 = horarioEstudianteServicio.getMateriasEstudiante(idEstudiante);
 		return ResponseEntity.ok(lstAsignaturasEstudiante2);
 	}
 	
-	
+	@CrossOrigin
 	@RequestMapping(value = "HorarioXEstudiante/", method = RequestMethod.GET)
 	public ResponseEntity<List<List<HorarioEstudiante>>> horarioEstudiantes(@RequestParam("idEstudiante") Integer idEstudiante, @RequestParam("jornada") Integer jornada, @RequestParam("canMateria") Integer canMateria){
 		 List<List<HorarioEstudiante>> listHorarioEstudiante2 = new ArrayList();
@@ -133,6 +137,7 @@ public class GenerarHorario {
 		return ResponseEntity.ok(listHorarioEstudiante2);
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "AsignaturasEstud/", method = RequestMethod.GET)
 	public ResponseEntity<List<opcHorarioXEstudiante>> horarioEstudiante(@RequestParam("idEstudiante") Integer idEstudiante, @RequestParam("jornada") Integer jornada, @RequestParam("canMateria") Integer canMateria){
 		List<opcHorarioXEstudiante> lstAsignaturasEstudiante2 = horarioEstudianteServicio.horarioEstudiante(idEstudiante, jornada);
