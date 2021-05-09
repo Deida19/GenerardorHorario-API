@@ -1,7 +1,9 @@
 package com.ucentral.edu.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ import com.ucentral.edu.service.HorarioEstudianteServicio;
 import com.ucentral.edu.service.HorarioServicio;
 import com.ucentral.edu.service.HorarioXEstudianteServicio;
 
+import io.swagger.models.Response;
+
 @RestController
 @RequestMapping("/GeneradorHorario")
 public class GenerarHorario {
@@ -45,6 +49,16 @@ public class GenerarHorario {
 	private HorarioEstudianteServicio horarioEstudianteServicio;
 	@Autowired
 	private HorarioXEstudianteServicio horarioXEstudianteServicio;
+	
+	
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public ResponseEntity<Estudiante> autenticacion(@RequestParam ("usuario") String usuario, @RequestParam("pass") String pass){
+		
+		Estudiante est = new Estudiante();
+		Estudiante optionalEstudiante = EstuService.autenticacion(usuario, pass);
+		
+		return ResponseEntity.ok(optionalEstudiante);
+	}
 	
 	
 	@RequestMapping(value = "EstudiantebyDoc", method = RequestMethod.GET)
@@ -110,11 +124,21 @@ public class GenerarHorario {
 		return ResponseEntity.ok(lstAsignaturasEstudiante2);
 	}
 	
+	
+	@RequestMapping(value = "HorarioXEstudiante/", method = RequestMethod.GET)
+	public ResponseEntity<List<List<HorarioEstudiante>>> horarioEstudiantes(@RequestParam("idEstudiante") Integer idEstudiante, @RequestParam("jornada") Integer jornada, @RequestParam("canMateria") Integer canMateria){
+		 List<List<HorarioEstudiante>> listHorarioEstudiante2 = new ArrayList();
+		listHorarioEstudiante2 = horarioEstudianteServicio.horarioEstudiantes(idEstudiante, jornada);
+		return ResponseEntity.ok(listHorarioEstudiante2);
+	}
+	
 	@RequestMapping(value = "AsignaturasEstud/", method = RequestMethod.GET)
 	public ResponseEntity<List<opcHorarioXEstudiante>> horarioEstudiante(@RequestParam("idEstudiante") Integer idEstudiante, @RequestParam("jornada") Integer jornada, @RequestParam("canMateria") Integer canMateria){
 		List<opcHorarioXEstudiante> lstAsignaturasEstudiante2 = horarioEstudianteServicio.horarioEstudiante(idEstudiante, jornada);
 		return ResponseEntity.ok(lstAsignaturasEstudiante2);
 	}
 	
+	
+
 	
 }

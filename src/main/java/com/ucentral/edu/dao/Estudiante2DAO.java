@@ -6,5 +6,6 @@ import com.ucentral.edu.entities.Estudiante;
 public interface Estudiante2DAO {
 	
 	public List<Estudiante> findbydocumento(String documento);
+	public Estudiante autenticacion(String usuario, String password);
 
 }

@@ -13,4 +13,5 @@ public interface HorarioEstudianteServicio {
 	public List<HorarioEstudiante> getMateriasEstudiante(Integer idEstudiante);
 	public List<HorarioEstudiante> getMateriasJornada(Integer idEstudiante, Integer jornada);
 	public List<opcHorarioXEstudiante>  horarioEstudiante(Integer idEstudiante, Integer jornada);
+	public List<List<HorarioEstudiante>>  horarioEstudiantes(Integer idEstudiante, Integer jornada);
 }

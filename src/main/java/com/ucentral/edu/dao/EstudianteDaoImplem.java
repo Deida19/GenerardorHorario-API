@@ -29,4 +29,25 @@ public class EstudianteDaoImplem implements Estudiante2DAO{
 		return estud;
 	}
 
+	@Override
+	public Estudiante autenticacion(String usuario, String password) {
+		
+		Estudiante est = new Estudiante();
+		Session currentSession = entitymng.unwrap(Session.class);
+		Query<Estudiante> theQuery = currentSession.createQuery("FROM Estudiante WHERE USUARIO =:user and password =:password", Estudiante.class);
+		theQuery.setParameter("user", usuario);
+		theQuery.setParameter("password", password);
+		
+		est.setApellido(theQuery.getSingleResult().getApellido());
+		est.setCorreo(theQuery.getSingleResult().getCorreo());
+		est.setId(theQuery.getSingleResult().getId());
+		est.setId_Plan_Estudio(theQuery.getSingleResult().getId_Plan_Estudio());
+		est.setIdentificacion(theQuery.getSingleResult().getIdentificacion());
+		est.setNombre(theQuery.getSingleResult().getNombre());
+		est.setPass("");
+		est.setSexo(theQuery.getSingleResult().getSexo());
+		est.setUser(theQuery.getSingleResult().getUser());
+		return est;
+	}
+
 }

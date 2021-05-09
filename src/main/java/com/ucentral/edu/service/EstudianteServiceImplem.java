@@ -21,4 +21,11 @@ public class EstudianteServiceImplem implements EstudianteServicio{
 		return listEstu;
 	}
 
+	@Override
+	public Estudiante autenticacion(String usuario, String password) {
+		Estudiante estudiante = new Estudiante();
+		estudiante = estuDAO.autenticacion(usuario, password);
+		return estudiante;
+	}
+
 }

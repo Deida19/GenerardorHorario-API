@@ -239,6 +239,61 @@ public class HorarioEstudServiceImplem implements HorarioEstudianteServicio{
 		return listOpcionHorario2;
 	}
 
+	@Override
+	public List<List<HorarioEstudiante>> horarioEstudiantes(Integer idEstudiante, Integer jornada) {
+
+		opcionesHorario2 opcHorario = new opcionesHorario2();
+		HorarioEstudiante newHorarioEstudiante = new HorarioEstudiante();
+		List<HorarioEstudiante> newListHorario =  null;
+		List<List<HorarioEstudiante>> horarioEstudianteFinal = new ArrayList<>();
+
+		List<HorarioEstudiante> horarioEstudiante = this.getMateriasJornada(idEstudiante, jornada);
+		boolean valida = false;
+		for(int i = 0; i < horarioEstudiante.size(); i++) {
+			List<HorarioEstudiante> horarioEstudiante2 = new ArrayList<HorarioEstudiante>();
+		
+				newHorarioEstudiante = horarioEstudiante.get(i);
+				horarioEstudiante2.add(newHorarioEstudiante);
+				
+				for(int j = 0; j < horarioEstudiante.size(); j++) {
+					valida = true;
+					if (j != i) {
+						int p = 0;
+						int cantHorarios = horarioEstudiante.get(j).getLstGrupo().get(0).getHorarios().size();
+						while(p < cantHorarios && valida) {
+							Horario horario2 = new Horario();
+							horario2.setDia(horarioEstudiante.get(j).getLstGrupo().get(0).getHorarios().get(p).getDia());
+							horario2.setHora_Inicio(horarioEstudiante.get(j).getLstGrupo().get(0).getHorarios().get(p).getHora_Inicio());
+							boolean exist = false;
+							for(int k = 0; k < horarioEstudiante2.size(); k++) {
+								for(int h = 0; h < horarioEstudiante2.get(k).getLstGrupo().get(0).getHorarios().size(); h++) {
+									if(horarioEstudiante2.get(k).getLstGrupo().get(0).getHorarios().get(h).getDia().equals(horario2.getDia()) && horarioEstudiante2.get(k).getLstGrupo().get(0).getHorarios().get(h).getHora_Inicio().equals(horario2.getHora_Inicio())) {
+										exist = true;
+									}
+								}
+								
+							}
+							if (exist) {
+								valida = false;
+							}else {
+								valida = true;
+							}
+							p++;
+						}
+						if (valida) {
+							newHorarioEstudiante = horarioEstudiante.get(j);
+							horarioEstudiante2.add(newHorarioEstudiante);
+						}
+					}
+				}
+				newListHorario = horarioEstudiante2;
+				horarioEstudianteFinal.add(newListHorario);
+			
+		}
+		
+		return horarioEstudianteFinal;
+	}
+
 	
 	
 	
