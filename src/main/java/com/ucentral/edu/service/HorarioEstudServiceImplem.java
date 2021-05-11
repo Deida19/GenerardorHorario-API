@@ -34,8 +34,10 @@ public class HorarioEstudServiceImplem implements HorarioEstudianteServicio{
 	
 	@Override
 	public List<HorarioEstudiante> getMateriasEstudiante(Integer idEstudiante) {
-
-		List<Asignatura> lstAsignaturas = asigPendiente.asignaturaPendEstudiante(idEstudiante);
+		lstMateriasEstudiante = new ArrayList<HorarioEstudiante>();
+		List<Asignatura> lstAsignaturas = null;
+		//List<Asignatura> lstAsignaturas = asigPendiente.asignaturaPendEstudiante(idEstudiante);
+		lstAsignaturas = asigPendiente.asignaturaPendEstudiante(idEstudiante);
 		 //
 		for(int i = 0; i < lstAsignaturas.size(); i++) {
 			List<GrupoHorario> lstGruposHorario = new ArrayList<>();
@@ -126,6 +128,7 @@ public class HorarioEstudServiceImplem implements HorarioEstudianteServicio{
 		HorarioEstudiante newHorarioEstudiante = new HorarioEstudiante();
 		List<HorarioEstudiante> newListHorario =  null;
 		List<List<HorarioEstudiante>> horarioEstudianteFinal = new ArrayList<>();
+		
 
 		List<HorarioEstudiante> horarioEstudiante = this.getMateriasJornada(idEstudiante, jornada);
 		boolean valida = false;

@@ -51,6 +51,8 @@ public class GenerarHorario {
 	@Autowired
 	private HorarioXEstudianteServicio horarioXEstudianteServicio;
 	
+	private List<opcHorarioXEstudiante> lstAsignaturasEstudiante2 = null;
+	
 	@CrossOrigin
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ResponseEntity<Estudiante> autenticacion(@RequestParam ("usuario") String usuario, @RequestParam("pass") String pass){
@@ -140,7 +142,8 @@ public class GenerarHorario {
 	@CrossOrigin
 	@RequestMapping(value = "AsignaturasEstud/", method = RequestMethod.GET)
 	public ResponseEntity<List<opcHorarioXEstudiante>> horarioEstudiante(@RequestParam("idEstudiante") Integer idEstudiante, @RequestParam("jornada") Integer jornada, @RequestParam("canMateria") Integer canMateria){
-		List<opcHorarioXEstudiante> lstAsignaturasEstudiante2 = horarioEstudianteServicio.horarioEstudiante(idEstudiante, jornada);
+		
+		lstAsignaturasEstudiante2 = horarioEstudianteServicio.horarioEstudiante(idEstudiante, jornada);
 		return ResponseEntity.ok(lstAsignaturasEstudiante2);
 	}
 	
